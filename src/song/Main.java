@@ -5,12 +5,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        GameObject go1 = new GameObject("Object 1");
-        GameObject go2 = new GameObject("Object 2");
-
-        System.out.println(go1.getName());
-        System.out.println(go2.getName());
-
         ObjectWithColor objectWithColor = new ObjectWithColor();
         Quantity quantityForSong = new Quantity();
         quantityForSong.getA();
