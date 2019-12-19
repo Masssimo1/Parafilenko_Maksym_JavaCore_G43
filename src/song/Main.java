@@ -2,94 +2,132 @@ package song;
 
 import java.util.Scanner;
 
+/**
+ * final/static - нужно посмотреть !!!!1
+ */
 public class Main {
     public static void main(String[] args) {
-
+        int a = 0; // при изменению нужно править метод questionQuantity
+        boolean restart = true;
+        boolean start = print();
         ObjectWithColor objectWithColor = new ObjectWithColor();
         Quantity quantityForSong = new Quantity();
-        quantityForSong.getA();
-        boolean x = print();
-        bottles (quantityForSong.getA(),objectWithColor);
+
+        // тело
+        while (start || restart) {
+            if (start) {
+                boolean checkQuantity = print2();
+                if (checkQuantity) {
+                    int quantity = questionQuantity(a);
+                    bottles(quantity, objectWithColor);
+                } else bottles(quantityForSong.getA(), objectWithColor);
+            }
+            start = restart();
+            restart = start;
+        }
+        System.out.println("Конец");
     }
 
+    //Вопрос о запуске
     private static boolean print() {
-        boolean x = false;
-        String start = "Запустить програму? (yes/no)";
-        Scanner input  = new Scanner(System.in);
+        boolean firstAnswer = false;
+        String start = "Вопрос#1: Запустить програму? (yes/no)";
+        Scanner input = new Scanner(System.in);
         System.out.println(start);
-        String t = "yes";
+        String yes = "yes";
         String str = input.next();
-        if (str.equals(t)) {
-            x = true;
-        } else {
-            System.out.println("Жаль, песня очень хорошая");
-            x = false;
+        if (str.equals(yes)) {
+            firstAnswer = true;
         }
-        return x;
+            System.out.println("Жаль, песня очень хорошая");
+        return firstAnswer;
     }
 
-
-    public static void bottles (int a, ObjectWithColor objectWithColor)  {
-
-        String b = objectWithColor.getObjects();
-        String c = objectWithColor.getObject();
-        String d = objectWithColor.getColorObjects();
-        String i = objectWithColor.getColorObject();
-        //Вопрос о запуске
-        String start = "Запустить програму? (yes/no)";
-        boolean x = false;
-        Scanner input  = new Scanner(System.in);
-        System.out.println(start);
-        String t = "yes";
-        String str = input.next();
-        if (str.equals(t)) {
-            x = true;
+    // количество задавать или нет
+    private static boolean print2() {
+        boolean secondAnswer = false;
+        String start2 = "Вопросу#2: Наберите 'yes', если хотете задать свое значение.";
+        System.out.println(start2);
+        Scanner input3 = new Scanner(System.in);
+        String str3 = input3.next();
+        String yes = "yes";
+        if (str3.equals(yes)) {
+            secondAnswer = true;
         }
-        else {
-            System.out.println("Жаль, песня очень хорошая");
-            return;
-        }
+            System.out.println("Будет использовано дефолтное значени и Вопрос#3 будет пропущен");
 
-        // Количество обьектов в песнеy
-        String quantity = "Задайте количество от 1 до 90";
-        int result = 1;
+        return secondAnswer;
+    }
+
+    // Количество обьектов в песне
+
+    private static int questionQuantity(int a) {
+        int result;
+        Scanner input3 = new Scanner(System.in);
+        String quantity = "Задайте количество от 1 до 99";
         boolean convert = false;
-        while ( a > 90 | a < 1 | convert == false ) {
+        while (a > 99 || a < 1 || !convert) {
             System.out.println(quantity);
-            String str2 = input.next();
+            String str2 = input3.next();
             try {
                 result = Integer.parseInt(str2);
                 System.out.println("Вы ввели:" + result);
                 convert = true;
             } catch (NumberFormatException igorResult) {
                 System.out.println("Вы ввели не только цифры");
+                result = 0;
             }
 
-            if (result < 0 | result > 91 & convert == true) {                         /// тут трабл
+            if (result < 0 || result > 99 & !convert) {                         /// тут трабл
                 System.out.println("Ваше значение вне диапазона от 1 до 90");
-            }
-            else a = result;
+            } else a = result;
         }
+        return a;
+    }
+
+    private static void bottles(int a, ObjectWithColor objectWithColor) {
+
+        String b = objectWithColor.getObjects();
+        String c = objectWithColor.getObject();
+        String d = objectWithColor.getColorObjects();
+        String i = objectWithColor.getColorObject();
+
 
         // запускается, если в консоли "y"
-        while (a > 1  &  x == true) {
-            System.out.println( a +  " " + d + " " + b + " пива на стене");
-            System.out.println( a +  " " + d + " " + b +" пива!");
-            System.out.println("Возьми одну, пусти по кругу");
-            a = a -1;
-        }
-        if ( a == 1 &  x == true ) {
-            b = "бутылка";
-            System.out.println( a + " "  + i + " " + b + " пива на стене");
-            System.out.println( a + " " + i + " " + b +" пива!");
+        while (a > 1) {
+            System.out.println(a + " " + d + " " + b + " пива на стене");
+            System.out.println(a + " " + d + " " + b + " пива!");
             System.out.println("Возьми одну, пусти по кругу");
             a = a - 1;
         }
-        if ( a == 0 &  x == true){
-            System.out.println ("Нет бутылок пива на стене!");
+        if (a == 1) {
+            System.out.println(a + " " + i + " " + c + " пива на стене");
+            System.out.println(a + " " + i + " " + c + " пива!");
+            System.out.println("Возьми одну, пусти по кругу");
+            a = a - 1;
         }
-        // если напечатали что-угодно только не "yes"
+        if (a == 0) {
+            System.out.println("Нет бутылок пива на стене!");
+        }
+
     }
+
+    private static boolean restart() {
+        boolean restartQuestion = false;
+        String start = "Запустить програму еще раз? (yes/no)";
+        Scanner input = new Scanner(System.in);
+        System.out.println(start);
+        String yes = "yes";
+        String str4 = input.next();
+        if (str4.equals(yes)) {
+            restartQuestion = true;
+            System.out.println("Ок. переходим в Вопросу#2");
+        } else {
+            restartQuestion = false;
+        }
+        return restartQuestion;
+
     }
+}
 
 
