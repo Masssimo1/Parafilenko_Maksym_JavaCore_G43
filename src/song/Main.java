@@ -3,7 +3,7 @@ package song;
 import java.util.Scanner;
 
 /**
- * final/static - нужно посмотреть !!!!1
+ * final/static - нужно посмотреть !!!!1qwer
  */
 public class Main {
     public static void main(String[] args) {
