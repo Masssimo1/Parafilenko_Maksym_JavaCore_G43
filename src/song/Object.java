@@ -19,4 +19,6 @@ public class Object {
     public void setObject(String object) {
         this.object = object;
     }
+
+
 }
