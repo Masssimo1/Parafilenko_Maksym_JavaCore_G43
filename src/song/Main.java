@@ -3,10 +3,10 @@ package song;
 import java.util.Scanner;
 
 /**
- * final/static - нужно посмотреть !!!!
+ *
  */
 public class Main {
-    public static void main(String[] args) {
+    public void main(String[] args) {
         int a = 0; // при изменению нужно править метод questionQuantity
         boolean restart = true;
         boolean start = print();
@@ -29,7 +29,7 @@ public class Main {
     }
 
     //Вопрос о запуске
-    private static boolean print() {
+    private boolean print() {
         boolean firstAnswer = false;
         String start = "Вопрос#1: Запустить програму? (yes/no)";
         Scanner input = new Scanner(System.in);
@@ -44,7 +44,7 @@ public class Main {
     }
 
     // количество задавать или нет
-    private static boolean print2() {
+    private boolean print2() {
         boolean secondAnswer = false;
         String start2 = "Вопросу#2: Наберите 'yes', если хотете задать свое значение.";
         System.out.println(start2);
@@ -61,7 +61,7 @@ public class Main {
 
     // Количество обьектов в песне
 
-    private static int questionQuantity(int a) {
+    private int questionQuantity(int a) {
         int result;
         Scanner input3 = new Scanner(System.in);
         String quantity = "Задайте количество от 1 до 99";
@@ -85,7 +85,7 @@ public class Main {
         return a;
     }
 
-    private static void bottles(int a, ObjectWithColor objectWithColor) {
+    private void bottles(int a, ObjectWithColor objectWithColor) {
 
         String b = objectWithColor.getObjects();
         String c = objectWithColor.getObject();
@@ -112,7 +112,7 @@ public class Main {
 
     }
 
-    private static boolean restart() {
+    private boolean restart() {
         boolean restartQuestion = false;
         String start = "Запустить програму еще раз? (yes/no)";
         Scanner input = new Scanner(System.in);
@@ -122,8 +122,6 @@ public class Main {
         if (str4.equals(yes)) {
             restartQuestion = true;
             System.out.println("Ок. переходим в Вопросу#2");
-        } else {
-            restartQuestion = false;
         }
         return restartQuestion;
 
