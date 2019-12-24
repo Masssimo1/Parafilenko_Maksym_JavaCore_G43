@@ -6,15 +6,13 @@ import java.util.Scanner;
  *
  */
 public class Main {
-    int a = 5;
 
     public static void main(String[] args) {
-        int a = 0; // при изменению нужно править метод questionQuantity
+        int a = 0; // questionQuantity при первом запуске присвоить 0
         boolean restart = true;
         boolean start = print();
         ObjectWithColor objectWithColor = new ObjectWithColor();
         Quantity quantityForSong = new Quantity();
-
 
 
         // тело
@@ -42,8 +40,7 @@ public class Main {
         String str = input.next();
         if (str.equals(yes)) {
             firstAnswer = true;
-        }
-            System.out.println("Жаль, песня очень хорошая");
+        } else System.out.println("Жаль, песня очень хорошая");
         return firstAnswer;
     }
 
@@ -57,9 +54,7 @@ public class Main {
         String yes = "yes";
         if (str3.equals(yes)) {
             secondAnswer = true;
-        }
-            System.out.println("Будет использовано дефолтное значени и Вопрос#3 будет пропущен");
-
+        } else System.out.println("Будет использовано дефолтное значени и Вопрос#3 будет пропущен");
         return secondAnswer;
     }
 
@@ -67,24 +62,24 @@ public class Main {
 
     private static int questionQuantity(int a) {
         int result;
+        int defaultMaxQuantity = 99; // Максимально значение по умолчанию
+        int defaultMinQuantity = 1;  // Минимальное количесвто по умолчанию
         Scanner input3 = new Scanner(System.in);
         String quantity = "Задайте количество от 1 до 99";
-        boolean convert = false;
-        while (a > 99 || a < 1 || !convert) {
+        while (a > defaultMaxQuantity || a < defaultMinQuantity ) {
             System.out.println(quantity);
             String str2 = input3.next();
             try {
                 result = Integer.parseInt(str2);
                 System.out.println("Вы ввели:" + result);
-                convert = true;
             } catch (NumberFormatException igorResult) {
                 System.out.println("Вы ввели не только цифры");
                 result = 0;
             }
 
-            if (result < 0 || result > 99 & !convert) {                         /// тут трабл
-                System.out.println("Ваше значение вне диапазона от 1 до 90");
-            } else a = result;
+            if (result < defaultMinQuantity || result > defaultMaxQuantity ) {                         /// тут трабл
+                System.out.println("Ваше значение вне диапазона от 1 до 99");
+            } else return result;
         }
         return a;
     }
@@ -98,7 +93,7 @@ public class Main {
         String i = objectWithColor.getColorObject();
 
 
-        // запускается, если в консоли "y"
+        // запуск песни
         while (a > 1) {
             System.out.println(a + " " + d + " " + b + " пива на стене");
             System.out.println(a + " " + d + " " + b + " пива!");
@@ -130,8 +125,8 @@ public class Main {
             System.out.println("Ок. переходим в Вопросу#2");
         }
         return restartQuestion;
-
-    }
+        }
 }
+
 
 
