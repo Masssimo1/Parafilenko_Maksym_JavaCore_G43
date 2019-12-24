@@ -132,10 +132,6 @@ public class Main {
         return restartQuestion;
 
     }
-    private static int condition ( int a ) {
-        a = 5;
-        condition (a == 4)
-    }
 }
 
 
