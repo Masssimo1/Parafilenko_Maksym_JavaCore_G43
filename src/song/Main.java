@@ -6,12 +6,16 @@ import java.util.Scanner;
  *
  */
 public class Main {
-    public void main(String[] args) {
+    int a = 5;
+
+    public static void main(String[] args) {
         int a = 0; // при изменению нужно править метод questionQuantity
         boolean restart = true;
         boolean start = print();
         ObjectWithColor objectWithColor = new ObjectWithColor();
         Quantity quantityForSong = new Quantity();
+
+
 
         // тело
         while (start || restart) {
@@ -29,7 +33,7 @@ public class Main {
     }
 
     //Вопрос о запуске
-    private boolean print() {
+    private static boolean print() {
         boolean firstAnswer = false;
         String start = "Вопрос#1: Запустить програму? (yes/no)";
         Scanner input = new Scanner(System.in);
@@ -44,7 +48,7 @@ public class Main {
     }
 
     // количество задавать или нет
-    private boolean print2() {
+    private static boolean print2() {
         boolean secondAnswer = false;
         String start2 = "Вопросу#2: Наберите 'yes', если хотете задать свое значение.";
         System.out.println(start2);
@@ -61,7 +65,7 @@ public class Main {
 
     // Количество обьектов в песне
 
-    private int questionQuantity(int a) {
+    private static int questionQuantity(int a) {
         int result;
         Scanner input3 = new Scanner(System.in);
         String quantity = "Задайте количество от 1 до 99";
@@ -85,7 +89,8 @@ public class Main {
         return a;
     }
 
-    private void bottles(int a, ObjectWithColor objectWithColor) {
+    // Візов песни
+    private static void bottles(int a, ObjectWithColor objectWithColor) {
 
         String b = objectWithColor.getObjects();
         String c = objectWithColor.getObject();
@@ -112,7 +117,8 @@ public class Main {
 
     }
 
-    private boolean restart() {
+    //restart check
+    private static boolean restart() {
         boolean restartQuestion = false;
         String start = "Запустить програму еще раз? (yes/no)";
         Scanner input = new Scanner(System.in);
@@ -125,6 +131,10 @@ public class Main {
         }
         return restartQuestion;
 
+    }
+    private static int condition ( int a ) {
+        a = 5;
+        condition (a == 4)
     }
 }
 
