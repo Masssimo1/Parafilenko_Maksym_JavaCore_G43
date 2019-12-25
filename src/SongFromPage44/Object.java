@@ -1,4 +1,4 @@
-package song;
+package SongFromPage44;
 
 public class Object {
     private String objects = "бутылки";
