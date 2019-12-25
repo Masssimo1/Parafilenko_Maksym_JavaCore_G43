@@ -1,13 +1,10 @@
 package song;
 
 public class Quantity {
-    private int  a = 99;
 
-    public int getA() {
-        return a;
-    }
+    // Дефолтній диапазон значений дляч песни
+    public static final int DEFAULT_MAX_VALUE = 99;
+    public static final int DEFAULT_MIN_VALUE = 1;
 
-    public void setA(int a) {
-        this.a = a;
-    }
+
 }

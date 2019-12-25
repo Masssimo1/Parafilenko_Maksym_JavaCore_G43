@@ -1,17 +1,26 @@
 package song;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
-/**
+/** Страница 44
+ * Детская песенка , про 99 бутылою
  *
+ * Реализация дополненна:
+ * 1- ДОбавлены вопросы
+ * 2- Для ответов используються импуты и распознавание чисел и текста
+ * 3- Код сраынивает введеныне ответы, как числа так и стринги
+ * 4- Реализован посторный старт просграммы
+ * 5- используються Scanner,equals,input.next, final, static,TimeUnit.sleep
  */
 public class Main {
-    public void main(String[] args) {
-        int a = 0; // при изменению нужно править метод questionQuantity
+
+    public static void main(String[] args) throws InterruptedException {
+        int a = 0;
         boolean restart = true;
         boolean start = print();
         ObjectWithColor objectWithColor = new ObjectWithColor();
-        Quantity quantityForSong = new Quantity();
+
 
         // тело
         while (start || restart) {
@@ -20,16 +29,16 @@ public class Main {
                 if (checkQuantity) {
                     int quantity = questionQuantity(a);
                     bottles(quantity, objectWithColor);
-                } else bottles(quantityForSong.getA(), objectWithColor);
+                } else bottles(Quantity.DEFAULT_MAX_VALUE, objectWithColor);
             }
             start = restart();
             restart = start;
         }
-        System.out.println("Конец");
+        System.out.println("Спасибо за то, что воспользовались нашим сервисом :)");
     }
 
     //Вопрос о запуске
-    private boolean print() {
+    private static boolean print() {
         boolean firstAnswer = false;
         String start = "Вопрос#1: Запустить програму? (yes/no)";
         Scanner input = new Scanner(System.in);
@@ -38,13 +47,12 @@ public class Main {
         String str = input.next();
         if (str.equals(yes)) {
             firstAnswer = true;
-        }
-            System.out.println("Жаль, песня очень хорошая");
+        } else System.out.println("Жаль, песня очень хорошая. Может передумаете....:)");
         return firstAnswer;
     }
 
-    // количество задавать или нет
-    private boolean print2() {
+    // Вопрос: использовать дефолтное значение или задать свое
+    private static boolean print2() {
         boolean secondAnswer = false;
         String start2 = "Вопросу#2: Наберите 'yes', если хотете задать свое значение.";
         System.out.println(start2);
@@ -53,57 +61,57 @@ public class Main {
         String yes = "yes";
         if (str3.equals(yes)) {
             secondAnswer = true;
-        }
-            System.out.println("Будет использовано дефолтное значени и Вопрос#3 будет пропущен");
-
+        } else System.out.println("Будет использовано дефолтное значени и Вопрос#3 будет пропущен");
         return secondAnswer;
     }
 
-    // Количество обьектов в песне
+    // Задать своге значение для песни в диапазоне от 1 до 99
 
-    private int questionQuantity(int a) {
+    private static int questionQuantity (int a) {
         int result;
+        int defaultMaxQuantity = Quantity.DEFAULT_MAX_VALUE;
+        int defaultMinQuantity = Quantity.DEFAULT_MIN_VALUE;
         Scanner input3 = new Scanner(System.in);
         String quantity = "Задайте количество от 1 до 99";
-        boolean convert = false;
-        while (a > 99 || a < 1 || !convert) {
+        while (a > defaultMaxQuantity || a < defaultMinQuantity ) {
             System.out.println(quantity);
             String str2 = input3.next();
             try {
                 result = Integer.parseInt(str2);
                 System.out.println("Вы ввели:" + result);
-                convert = true;
             } catch (NumberFormatException igorResult) {
                 System.out.println("Вы ввели не только цифры");
                 result = 0;
             }
 
-            if (result < 0 || result > 99 & !convert) {                         /// тут трабл
-                System.out.println("Ваше значение вне диапазона от 1 до 90");
-            } else a = result;
+            if (result < defaultMinQuantity || result > defaultMaxQuantity ) {                         /// тут трабл
+                System.out.println("Ваше значение вне диапазона от 1 до 99");
+            } else return result;
         }
         return a;
     }
 
-    private void bottles(int a, ObjectWithColor objectWithColor) {
+    // Запуск песни
+    private static void bottles(int a, ObjectWithColor objectWithColor) throws InterruptedException {
 
         String b = objectWithColor.getObjects();
         String c = objectWithColor.getObject();
         String d = objectWithColor.getColorObjects();
         String i = objectWithColor.getColorObject();
-
-
-        // запускается, если в консоли "y"
+        System.out.println( "Песня начнеться через 3 секунды");
+        TimeUnit.SECONDS.sleep(3);
         while (a > 1) {
             System.out.println(a + " " + d + " " + b + " пива на стене");
             System.out.println(a + " " + d + " " + b + " пива!");
             System.out.println("Возьми одну, пусти по кругу");
+            TimeUnit.MILLISECONDS.sleep (300);
             a = a - 1;
         }
         if (a == 1) {
             System.out.println(a + " " + i + " " + c + " пива на стене");
             System.out.println(a + " " + i + " " + c + " пива!");
             System.out.println("Возьми одну, пусти по кругу");
+            TimeUnit.MILLISECONDS.sleep (300);
             a = a - 1;
         }
         if (a == 0) {
@@ -112,7 +120,8 @@ public class Main {
 
     }
 
-    private boolean restart() {
+    //restart check
+    private static boolean restart() {
         boolean restartQuestion = false;
         String start = "Запустить програму еще раз? (yes/no)";
         Scanner input = new Scanner(System.in);
@@ -124,8 +133,8 @@ public class Main {
             System.out.println("Ок. переходим в Вопросу#2");
         }
         return restartQuestion;
-
-    }
+        }
 }
+
 
 
