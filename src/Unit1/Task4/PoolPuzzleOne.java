@@ -1,4 +1,4 @@
-package Unit1;
+package Unit1.Task4;
 
 public class PoolPuzzleOne {
 
@@ -14,7 +14,7 @@ public class PoolPuzzleOne {
         // x = x - 2;
         // x = x - 1; --
 
-        // System.out.print("a "); --  /** В книге не верный ответ, так как в условии стринга с пробелом!!!! */
+        // System.out.print("a "); --  /** В книге не верный ответ, так как стринга с пробелом!!!! */
         // System.out.print(" ");
         // System.out.print("n ");
         // System.out.print("an"); --
