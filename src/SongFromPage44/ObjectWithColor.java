@@ -1,4 +1,4 @@
-package song;
+package SongFromPage44;
 
 public class ObjectWithColor extends Object{
     private String colorObjects = "синиe";
