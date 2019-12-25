@@ -1,18 +1,25 @@
 package song;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
-/**
+/** Страница 44
+ * Детская песенка , про 99 бутылою
  *
+ * Реализация дополненна:
+ * 1- ДОбавлены вопросы
+ * 2- Для ответов используються импуты и распознавание чисел и текста
+ * 3- Код сраынивает введеныне ответы, как числа так и стринги
+ * 4- Реализован посторный старт просграммы
+ * 5- используються Scanner,equals,input.next, final, static,TimeUnit.sleep
  */
 public class Main {
 
-    public static void main(String[] args) {
-        int a = 0; // questionQuantity при первом запуске присвоить 0
+    public static void main(String[] args) throws InterruptedException {
+        int a = 0;
         boolean restart = true;
         boolean start = print();
         ObjectWithColor objectWithColor = new ObjectWithColor();
-        Quantity quantityForSong = new Quantity();
 
 
         // тело
@@ -22,12 +29,12 @@ public class Main {
                 if (checkQuantity) {
                     int quantity = questionQuantity(a);
                     bottles(quantity, objectWithColor);
-                } else bottles(quantityForSong.getA(), objectWithColor);
+                } else bottles(Quantity.DEFAULT_MAX_VALUE, objectWithColor);
             }
             start = restart();
             restart = start;
         }
-        System.out.println("Конец");
+        System.out.println("Спасибо за то, что воспользовались нашим сервисом :)");
     }
 
     //Вопрос о запуске
@@ -40,11 +47,11 @@ public class Main {
         String str = input.next();
         if (str.equals(yes)) {
             firstAnswer = true;
-        } else System.out.println("Жаль, песня очень хорошая");
+        } else System.out.println("Жаль, песня очень хорошая. Может передумаете....:)");
         return firstAnswer;
     }
 
-    // количество задавать или нет
+    // Вопрос: использовать дефолтное значение или задать свое
     private static boolean print2() {
         boolean secondAnswer = false;
         String start2 = "Вопросу#2: Наберите 'yes', если хотете задать свое значение.";
@@ -58,12 +65,12 @@ public class Main {
         return secondAnswer;
     }
 
-    // Количество обьектов в песне
+    // Задать своге значение для песни в диапазоне от 1 до 99
 
-    private static int questionQuantity(int a) {
+    private static int questionQuantity (int a) {
         int result;
-        int defaultMaxQuantity = 99; // Максимально значение по умолчанию
-        int defaultMinQuantity = 1;  // Минимальное количесвто по умолчанию
+        int defaultMaxQuantity = Quantity.DEFAULT_MAX_VALUE;
+        int defaultMinQuantity = Quantity.DEFAULT_MIN_VALUE;
         Scanner input3 = new Scanner(System.in);
         String quantity = "Задайте количество от 1 до 99";
         while (a > defaultMaxQuantity || a < defaultMinQuantity ) {
@@ -84,26 +91,27 @@ public class Main {
         return a;
     }
 
-    // Візов песни
-    private static void bottles(int a, ObjectWithColor objectWithColor) {
+    // Запуск песни
+    private static void bottles(int a, ObjectWithColor objectWithColor) throws InterruptedException {
 
         String b = objectWithColor.getObjects();
         String c = objectWithColor.getObject();
         String d = objectWithColor.getColorObjects();
         String i = objectWithColor.getColorObject();
-
-
-        // запуск песни
+        System.out.println( "Песня начнеться через 3 секунды");
+        TimeUnit.SECONDS.sleep(3);
         while (a > 1) {
             System.out.println(a + " " + d + " " + b + " пива на стене");
             System.out.println(a + " " + d + " " + b + " пива!");
             System.out.println("Возьми одну, пусти по кругу");
+            TimeUnit.MILLISECONDS.sleep (300);
             a = a - 1;
         }
         if (a == 1) {
             System.out.println(a + " " + i + " " + c + " пива на стене");
             System.out.println(a + " " + i + " " + c + " пива!");
             System.out.println("Возьми одну, пусти по кругу");
+            TimeUnit.MILLISECONDS.sleep (300);
             a = a - 1;
         }
         if (a == 0) {
